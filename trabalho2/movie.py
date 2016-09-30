@@ -1,7 +1,4 @@
 import csv
-import matplotlib.pyplot as plt
-import numpy as np
-import re
 
 movies_num_faces = {}
 score_num_faces = {}
