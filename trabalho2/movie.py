@@ -6,8 +6,8 @@ import re
 movies_num_faces = {}
 score_num_faces = {}
 keys=[]
-#leitura de arquivo
 
+#leitura de arquivo
 csvfile = open('dados/movie_metadata.csv','r')
 reader = csv.reader(csvfile)
 
@@ -28,17 +28,6 @@ for row in reader:
     else:
       score_num_faces[key] = float(row[25])
   i+=1
-# print(movies_num_faces)
-# print(score_num_faces)
 
 for key in score_num_faces.keys():
   print("Media dos filmes com "+key+" faces: "+str(score_num_faces[key]/movies_num_faces[key]))
-
-# arq = open('movie_metadata.csv','r')
-# arq = arq.read()
-# lines = arq.split("\n")
-
-# for lines in lines[1:]:
-#   data.append(lines.split(","))
-
-# print(data[0])

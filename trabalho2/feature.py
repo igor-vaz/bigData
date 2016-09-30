@@ -32,10 +32,3 @@ sum_pop = sum(pop)
 
 print("Media de tempo da amostra: "+str(sum_sample/float(len(sample))))
 print("Media de tempo da populacao: "+str(sum_pop/float(len(pop))))
-
-
-# print(len(sample))
-# print(sample)
-# print(len(pop))
-# print(pop[-1])
-
