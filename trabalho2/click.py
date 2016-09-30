@@ -6,8 +6,15 @@ import re
 dataA =[]
 dataB =[]
 
-csvfile = open('dados/amostra_A_click.csv','r')
-reader = csv.reader(csvfile,  delimiter=';')
+def readFile(file):
+  read=[]
+  csvfile = open(file,'r')
+  reader = csv.reader(csvfile,  delimiter=';')
 
-for row in reader:
-    print(row)
+  for row in reader:
+      read.append(row)
+
+  return read
+
+dataA = readFile('dados/amostra_A_click.csv')
+dataB = readFile('dados/amostra_B_click.csv')
