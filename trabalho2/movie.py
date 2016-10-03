@@ -1,9 +1,9 @@
 import csv
+from scipy.stats import spearmanr
 
-movies_num_faces = {}
-score_num_faces = {}
-keys=[]
-
+X =[]
+Y =[]
+count = 0
 #leitura de arquivo
 csvfile = open('dados/movie_metadata.csv','r')
 reader = csv.reader(csvfile)
@@ -13,18 +13,17 @@ for row in reader:
   if i==0:
     pass
   else:
-    key = row[15]
-    keys.append(row[15])
-    if key in movies_num_faces.keys():
-      movies_num_faces[key] += 1.0
+    if row[15]=='':
+      count+=1
     else:
-      movies_num_faces[key] = 1.0
-
-    if key in score_num_faces.keys():
-      score_num_faces[key] += float(row[25])
-    else:
-      score_num_faces[key] = float(row[25])
+      Y.append(row[15]) #num_faces
+      X.append(row[25]) #imdb_score
   i+=1
 
-for key in score_num_faces.keys():
-  print("Media dos filmes com "+key+" faces: "+str(score_num_faces[key]/movies_num_faces[key]))
+print count
+
+res = spearmanr(X,Y)
+print res 
+#(-0.087125663312467294, 6.0391525040632296e-10)
+# rho negativo e p-valor mto pequeno -> x aumenta, y diminui
+# No caso nota aumenta com poucas faces
