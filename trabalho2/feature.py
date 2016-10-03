@@ -2,6 +2,7 @@ from scipy.stats import spearmanr
 from sys import path
 path.append('staticsCodes/')
 import chisquared
+
 #leitura de arquivo
 def readFile(file):
   data =[]
@@ -34,13 +35,3 @@ sum_pop = sum(pop)
 
 print("Media de tempo da amostra: "+str(sum_sample/float(len(sample))))
 print("Media de tempo da populacao: "+str(sum_pop/float(len(pop))))
-
-# resSample = spearmanr(sample)
-# resPop = spearmanr(pop)
-# print(res)
-
-c = chisquared.chi(len(sample), 0.05, sample)
-c.run()
-
-c2 = chisquared.chi(len(pop), 0.05, pop)
-c2.run()
