@@ -1,17 +1,25 @@
+from scipy.stats import chi2_contingency as chi2
 import csv
 
-dataA =[]
-dataB =[]
+X = []
+Y = []
 
-def readFile(file):
-  read=[]
-  csvfile = open(file,'r')
-  reader = csv.reader(csvfile,  delimiter=';')
+def count(file):
+    count_yes = 0
+    count_no = 0
+    csvfile = open(file, 'rb') 
+    reader = csv.reader(csvfile, delimiter=';')
+    next(reader,None) # Pula a primeira linha
+    for row in reader:
+  if( row[1] == 'yes' ):
+      count_yes += 1
+  else:
+      count_no += 1
 
-  for row in reader:
-      read.append(row)
+A_yes,A_no = count("amostra_A_click.csv")
+B_yes,B_no = count("amostra_B_click.csv")
 
-  return read
+M = [[A_yes,A_no],[B_yes,B_no]]
 
-dataA = readFile('dados/amostra_A_click.csv')
-dataB = readFile('dados/amostra_B_click.csv')
+res = chi2(M)
+print(res)
