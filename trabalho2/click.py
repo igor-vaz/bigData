@@ -15,9 +15,9 @@ def count(file):
         count_yes += 1
       else:
         count_no += 1
-
-A_yes,A_no = count("amostra_A_click.csv")
-B_yes,B_no = count("amostra_B_click.csv")
+    return(count_yes, count_no)
+A_yes,A_no = count("dados/amostra_A_click.csv")
+B_yes,B_no = count("dados/amostra_B_click.csv")
 
 M = [[A_yes,A_no],[B_yes,B_no]]
 
