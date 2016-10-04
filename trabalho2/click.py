@@ -11,10 +11,10 @@ def count(file):
     reader = csv.reader(csvfile, delimiter=';')
     next(reader,None) # Pula a primeira linha
     for row in reader:
-  if( row[1] == 'yes' ):
-      count_yes += 1
-  else:
-      count_no += 1
+      if( row[1] == 'yes' ):
+        count_yes += 1
+      else:
+        count_no += 1
 
 A_yes,A_no = count("amostra_A_click.csv")
 B_yes,B_no = count("amostra_B_click.csv")
