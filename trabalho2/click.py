@@ -22,4 +22,5 @@ B_yes,B_no = count("dados/amostra_B_click.csv")
 M = [[A_yes,A_no],[B_yes,B_no]]
 
 res = chi2(M)
+
 print(res)
