@@ -10,17 +10,23 @@ y_train =[]
 x_teste =[]
 y_teste =[]
 
+arg_file = open('args.csv','w')
+
 def objective_function(args):
     global x_train
     global y_train
     res=[]
     kf = KFold(len(x_train), n_folds=10, shuffle=True)
     print args
-    output = open('args.csv','w')
-    output.write("Args:")
+    
+    arg_file.write("Args:")
+    arg_file.write("\n")
+    arg_file.flush()
     for arg in args:
-        output.write("\t"+str(arg))
-    output.write("\n")
+        arg_file.write("\t"+str(arg))
+        arg_file.flush()
+    arg_file.write("\n")
+    arg_file.flush()
     #TODO: colocar o resto dos parametros
     for train_index, test_index in kf:
         X, X_test = x_train[train_index], x_train[test_index]
@@ -33,9 +39,13 @@ def objective_function(args):
         dteste = xgb.DMatrix(X_test)
         y_pred = bst.predict(dteste, ntree_limit=bst.best_ntree_limit)
         res.append(roc_auc_score(y_test,y_pred))
-    output.write("Mean:")
+    arg_file.write("Mean:")
+    arg_file.write("\n")
+    arg_file.flush()
     mean = np.mean(res)
-    output.write("\t"+str(mean))
+    arg_file.write("\t"+str(mean))
+    arg_file.write("\n")
+    arg_file.flush()
     return mean
 
 #leitura de arquivo
