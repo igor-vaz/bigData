@@ -87,21 +87,3 @@ lb = [0,0,1,0,0,0.1,0,0,0]
 # Upper-bound:
 ub = [1,10,10,10,1,1,10,10,10]
 pso(objective_function,lb,ub,swarmsize=100,omega=0.5,phip=0.5,phig=0.5,debug=False)
-exit(0)
-file = open('test_file.csv','r')
-file = file.read()
-lines = file.split("\n")
-
-for line in lines[1:]:
-    l = line.split(",")
-    
-    x_teste.append(l)
-
-del x_teste[-1]
-
-x_teste = np.array(x_teste, dtype='f')
-
-output = open('output.csv','w')
-for elem in y_pred:
-    output.write(str(elem))
-    output.write("\n")
