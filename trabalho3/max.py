@@ -25,6 +25,7 @@ for d in data:
         means.append(float(d[-1]))
 
 maxMean = max(means)
+print "MaxMean: "+str(maxMean)
 i = means.index(maxMean)
 args = data[i][:len(data[i])-1]
 
@@ -57,6 +58,9 @@ for line in lines[1:]:
     x_test.append(l)
 
 del x_test[-1]
+
+print "Parametros utilizados:"
+print args
 
 x_test = np.array(x_test, dtype='f')
 

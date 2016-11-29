@@ -22,7 +22,7 @@ def objective_function(args):
     for arg in args:
         arg_file.write("\t"+str(arg))
         arg_file.flush()
-    #TODO: colocar o resto dos parametros
+
     for train_index, test_index in kf:
         X, X_test = x_train[train_index], x_train[test_index]
         y, y_test = y_train[train_index], y_train[test_index]
@@ -86,4 +86,4 @@ x_train = np.array(x_train, dtype='f')
 lb = [0,0,1,0,0,0.1,0,0,0]
 # Upper-bound:
 ub = [1,10,10,10,1,1,10,10,10]
-pso(objective_function,lb,ub,swarmsize=100,omega=0.5,phip=0.5,phig=0.5,debug=False)
+pso(objective_function,lb,ub,swarmsize=200,omega=0.8,phip=0.8,phig=0.2,maxiter=1000,debug=False)
