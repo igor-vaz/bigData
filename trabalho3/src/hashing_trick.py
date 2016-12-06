@@ -64,15 +64,20 @@ def kill_column(rows_complete,position_column):
 
 def write_csv_output(rows_complete):
     output = open('output/hashing_trick.csv','w')
-    wr = csv.writer(output,delimiter=',', quoting=csv.QUOTE_ALL)
     l=0
-    while(l<len(rows_complete)):
-        wr.writerow(rows_complete[l])
+    while(l<len(rows_complete)-1):
+        i = 0
+        for elem in rows_complete[l]:
+            output.write(elem)
+            if i < len(rows_complete[l])-1:
+                output.write(",")
+            i+=1
+        output.write("\n")
         l+=1
     
     
 def main():
-    file_name = 'data/teste.csv'
+    file_name = 'data/train_file.csv'
     position_column = 0   #Numero da coluna que sera realizado o hashing trick 
     
     number_unique = numbers_unique_column(file_name,position_column)

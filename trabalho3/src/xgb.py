@@ -17,7 +17,6 @@ def objective_function(args):
     global y_train
     res=[]
     kf = KFold(len(x_train), n_folds=10, shuffle=True)
-    # print args
 
     for arg in args:
         arg_file.write("\t"+str(arg))
