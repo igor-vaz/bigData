@@ -28,31 +28,30 @@ def rows_csv(csv_train):
     for line in lines[1:]:
         l = line.split(",")
         y_train.append(l[-1])
-        del l[-1]
+        #del l[-1]
         x_train.append(l)
     
-    return x_train
+    return x_train,y_train
 
 # Return number columns in CSV 
 def number_column_csv(csv_train):    
-    f=open('teste.csv')
+    f=open(csv_train)
     reader = csv.reader(f)
     num_cols = len(reader.next())
     return num_cols-1 
 
-def hashing_trick(number_unique,new_rows,length_column,position_column):
+def hashing_trick(number_unique,new_rows,target,length_column,position_column):
     i,j=0,0
     while(j<len(new_rows)-1):
         while(i<len(number_unique)):
-            #print j
             if (number_unique[i] == new_rows[j][position_column]):
                 new_rows[j].append('1')
             else:
                 new_rows[j].append('0')
             i+=1
+        new_rows[j].append(target[j])
         j+=1
         i=0
-
     return new_rows
 
 def kill_column(rows_complete,position_column):
@@ -73,13 +72,13 @@ def write_csv_output(rows_complete):
     
     
 def main():
-    file_name = 'data/train_file.csv'
+    file_name = 'data/teste.csv'
     position_column = 0   #Numero da coluna que sera realizado o hashing trick 
     
     number_unique = numbers_unique_column(file_name,position_column)
     rows = rows_csv(file_name)
     length_column = number_column_csv(file_name)
-    rows_complete = hashing_trick(number_unique,rows,length_column,position_column)
+    rows_complete = hashing_trick(number_unique,rows[0],rows[1],length_column,position_column)
     rows_csv_output = kill_column(rows_complete,position_column)
     write_csv_output(rows_csv_output)
 
