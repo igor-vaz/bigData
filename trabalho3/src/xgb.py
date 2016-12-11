@@ -37,7 +37,7 @@ def objective_function(args):
                     'min_child_weight' : int(args[3]),
                     'subsample' : args[4],
                     'colsample_bytree' : args[5],
-                    'num_round' : int(args[6]),
+                    'num_round' : 300,#int(args[6]),
                     'scale_pos_weight' : args[7],
                     'max_delta_step' : int(args[8])
                  }
@@ -54,19 +54,17 @@ def objective_function(args):
     return mean
 
 #leitura de arquivo
+#file = open('output/hashing_trick_train.csv','r')
 file = open('data/train_file.csv','r')
 file = file.read()
-lines = file.split("\n")
+lines = file.replace("\r","").split("\n")
+del lines[-1]
 
 for line in lines[1:]:
     l = line.split(",")
     y_train.append(l[-1])
     del l[-1]
     x_train.append(l)
-
-del y_train[-1]
-
-del x_train[-1]
 
 y_train = np.array(y_train, dtype='f')
 x_train = np.array(x_train, dtype='f')
@@ -78,11 +76,11 @@ x_train = np.array(x_train, dtype='f')
     # min_child_weight range: [0,10] [3]
     # subsample range: (0,1] [4]
     # colsample_bytree range: (0,1] [5]
-    # num_round sem range ,por opcao, [0,100] [6]
+    # num_round sem range ,por opcao, [0,300] [6]
     # scale_pos_weight sem range ,por opcao, [0,10] [7]
     # max_delta_step range: [0,10] [8]
 # Lower-bound:
 lb = [0,0,1,0,0,0.1,0,0,0]
 # Upper-bound:
-ub = [1,10,10,10,1,1,10,10,10]
-pso(objective_function,lb,ub,swarmsize=200,omega=0.8,phip=0.8,phig=0.2,maxiter=1000,debug=False)
+ub = [1,10,10,10,1,1,300,10,10]
+pso(objective_function,lb,ub,swarmsize=200,omega=0.6,phip=0.6,phig=0.4,maxiter=1000,debug=False)
